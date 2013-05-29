@@ -4,17 +4,19 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
+
+import uk.abstractit.test.speaker.EnglishSpeaker;
+import uk.abstractit.test.speaker.ISpeaker;
 
 public class ConverterTest {
-
 	
 	private Converter converter;
-
+	
 	@Before
 	public void setup() {
 		converter = new Converter();
-		
+        ISpeaker englishSpeaker = new EnglishSpeaker();
+        converter.setSpeaker(englishSpeaker);		
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
@@ -112,6 +114,16 @@ public class ConverterTest {
 		assertEquals("one hundred million", converter.inWords(100000000));
 		assertEquals("one thousand million", converter.inWords(1000000000));
 		assertEquals("nine thousand million", converter.inWords(9000000000L));
+	}	
+	@Test
+	public void testRandomNumber() {
+		assertEquals("sixty five thousand", converter.inWords(65000L));
+		assertEquals("seventy seven million seven hundred and seventy seven thousand seven hundred and seventy seven", 
+				converter.inWords(77777777L));
+		assertEquals("seven hundred and seventy seven thousand seven hundred and seventy seven", 
+				converter.inWords(777777L));
+		assertEquals("one hundred and twenty three million four hundred and fifty six thousand seven hundred and eighty nine", 
+				converter.inWords(123456789L));
 	}	
 	
 }

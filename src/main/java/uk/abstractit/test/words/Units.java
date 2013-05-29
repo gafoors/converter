@@ -1,4 +1,4 @@
-package uk.abstractit.test;
+package uk.abstractit.test.words;
 
 public enum Units implements Speakable {
 	ZERO(0, "Zero"),
@@ -36,14 +36,6 @@ public enum Units implements Speakable {
 	}
 	
 	public static Units fromInt(int i) {
-		for(Units unit : Units.values()) {
-			if(unit.intValue == i) {
-				return unit;
-			}
-		}
-		return null;
-	}
-	public static Units fromInt(int i, boolean unitsOnly) {
 		for(Units unit : Units.values()) {
 			if(unit.intValue == i) {
 				return unit;

@@ -3,23 +3,24 @@ package uk.abstractit.test;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.abstractit.test.speaker.ISpeaker;
+import uk.abstractit.test.words.Group;
+import uk.abstractit.test.words.Seperator;
+import uk.abstractit.test.words.Speakable;
+import uk.abstractit.test.words.Tens;
+import uk.abstractit.test.words.Units;
+
 public class Converter {
 
+	private ISpeaker speaker;
+	
 	public String inWords(long i) {
 		List<Speakable> words = new ArrayList<Speakable>();
 		if (i < 0) {
 			throw new IllegalArgumentException("Connot speak negative numbers");
 		} else
 			getWords(i, words);
-		return speak(words);
-	}
-
-	private String speak(List<Speakable> words) {
-		StringBuilder builder = new StringBuilder();
-		for (Speakable word : words) {
-			builder.append(word.getWord());
-		}
-		return builder.toString();
+		return speaker.speak(words);
 	}
 
 	private List<Speakable> getWords(long i, List<Speakable> words) {
@@ -54,7 +55,8 @@ public class Converter {
 		int thousand = (int) (i / 1000);
 
 		if (i >= 1000) {
-			words.add(Units.fromInt(thousand));
+			int hundred = getHundreds(thousand, words);
+			getTensAndUnits(hundred, words);
 			words.add(Seperator.SPACE);
 			words.add(Group.THOUSAND);
 			i = i - (thousand * 1000);
@@ -111,4 +113,7 @@ public class Converter {
 		}
 	}
 
+	public void setSpeaker(ISpeaker speaker) {
+		this.speaker = speaker;
+	}
 }

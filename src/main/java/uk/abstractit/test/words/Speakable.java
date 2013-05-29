@@ -1,4 +1,4 @@
-package uk.abstractit.test;
+package uk.abstractit.test.words;
 
 public interface Speakable {
 

@@ -1,4 +1,4 @@
-package uk.abstractit.test;
+package uk.abstractit.test.words;
 
 public enum Tens implements Speakable {
 	TWENTY(2, "twenty"),
